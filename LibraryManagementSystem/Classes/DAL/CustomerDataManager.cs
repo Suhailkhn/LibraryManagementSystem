@@ -61,14 +61,15 @@ namespace LibraryManagementSystem.Classes.DAL
         {
             Customer result = null;
             string sql = @"SELECT
-                                CustomerId
+                                CustomerId,
                                 FirstName,
                                 LastName,
                                 Email,
                                 DateOfBirth,
                                 AccountCreatedOn
                            FROM customers
-                           WHERE CustomerId = @CustomerId;";
+                           WHERE CustomerId = @CustomerId
+                           AND IsActive = true;";
 
             var parameters = new
             {
@@ -103,6 +104,7 @@ namespace LibraryManagementSystem.Classes.DAL
 
             var parameters = new
             {
+                CustomerId = customer.CustomerId,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Email = customer.Email,
@@ -133,7 +135,8 @@ namespace LibraryManagementSystem.Classes.DAL
             bool success = true;
             string sql = @"UPDATE customers
                            SET IsActive=false
-                           WHERE CustomerId = @CustomerId;";
+                           WHERE CustomerId = @CustomerId 
+                           AND IsActive = true;";
 
             var parameters = new
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Models
 {
-    class BookTransaction
+    public class BookTransaction
     {
         public uint TransactionId { get; set; }
         public Customer Customer { get; set; }

@@ -118,6 +118,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CustomerDeletionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerUpdationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,13 +151,24 @@
     <Compile Include="ViewModels\BookSearchVM.cs" />
     <Compile Include="ViewModels\Commands\AddBookCommand.cs" />
     <Compile Include="ViewModels\Commands\CreateCustomerAccountCommand.cs" />
+    <Compile Include="ViewModels\Commands\DeleteCustomerAccountCommand.cs" />
+    <Compile Include="ViewModels\Commands\FetchCustomerDetailsCommand.cs" />
     <Compile Include="ViewModels\Commands\SearchBookCommand.cs" />
+    <Compile Include="ViewModels\Commands\UpdateCustomerAccountCommand.cs" />
     <Compile Include="ViewModels\CustomerCreationVM.cs" />
+    <Compile Include="ViewModels\CustomerDeletionVM.cs" />
+    <Compile Include="ViewModels\CustomerUpdationVM.cs" />
     <Compile Include="Views\BookCreationWindow.xaml.cs">
       <DependentUpon>BookCreationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerCreationWindow.xaml.cs">
       <DependentUpon>CustomerCreationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerDeletionWindow.xaml.cs">
+      <DependentUpon>CustomerDeletionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerUpdationWindow.xaml.cs">
+      <DependentUpon>CustomerUpdationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>

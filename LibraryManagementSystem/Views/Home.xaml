@@ -47,16 +47,26 @@
 
         <Style TargetType="Button" BasedOn="{StaticResource actionBtnBase}" x:Key="primaryActionBtn">
             <Setter Property="Background" Value="Black"/>
+            <Setter Property="Width" Value="220"/>
         </Style>
 
         <Style TargetType="Button" BasedOn="{StaticResource actionBtnBase}" x:Key="secondaryActionBtn">
             <Setter Property="Background" Value="#004a7c"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Height" Value="30"/>
         </Style>
 
         <Style TargetType="ListView" x:Key="bookList">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Background" Value="#e8f1f5"/>
+        </Style>
+
+        <Style TargetType="Expander" x:Key="expanderStyle">
+            <Setter Property="Foreground" Value="#fafafa"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
 
     </Window.Resources>
@@ -73,9 +83,18 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Library Management System" Style="{StaticResource titleStyle}"/>
+            
             <StackPanel Grid.Row="1">
                 <Button x:Name="AddBookBtn" Content="Add New Book" Style="{StaticResource primaryActionBtn}" Click="AddBookBtn_Click"/>
-                <Button x:Name="CreateCustomerBtn" Content="Create New Customer" Style="{StaticResource secondaryActionBtn}" Click="CreateCustomerBtn_Click"/>
+                
+                <Expander Header="Manage Customers" Style="{StaticResource expanderStyle}">
+                    <StackPanel>
+                        <Button x:Name="CreateCustomerBtn" Content="Create New Customer" Style="{StaticResource secondaryActionBtn}" Click="CreateCustomerBtn_Click"/>
+                        <Button x:Name="updateCustomerBtn" Content="Update Customer" Style="{StaticResource secondaryActionBtn}" Click="UpdateCustomerBtn_Click"/>
+                        <Button x:Name="deleteCustomerBtn" Content="Delete Customer" Style="{StaticResource secondaryActionBtn}" Click="DeleteCustomerBtn_Click"/>
+                    </StackPanel>
+                </Expander>
+                
             </StackPanel>
         </Grid>
 
