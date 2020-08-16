@@ -115,7 +115,8 @@ namespace LibraryManagementSystem.Classes.DAL
             bool success = true;
             string sql = @"Update books 
                            SET IsActive=false 
-                           WHERE BookId=@BookId;";
+                           WHERE BookId=@BookId
+                           AND IsActive = true;";
 
             var parameters = new
             {
@@ -155,7 +156,8 @@ namespace LibraryManagementSystem.Classes.DAL
                                 TotalCopies,
                                 AvailableCopies
                             FROM books
-                            WHERE BookId = @BookId;";
+                            WHERE BookId = @BookId
+                            IsActive = true;";
 
             var parameters = new
             {
@@ -192,7 +194,8 @@ namespace LibraryManagementSystem.Classes.DAL
                                 TotalCopies,
                                 AvailableCopies
                             FROM books
-                            WHERE Title Like '%{0}%';";
+                            WHERE Title Like '%{0}%'
+                            AND IsActive = true;";
 
             sql = String.Format(sql, query);
 
@@ -236,9 +239,9 @@ namespace LibraryManagementSystem.Classes.DAL
                                 c.AccountCreatedOn
                             FROM book_transaction bt
                             INNER JOIN books b
-	                            ON bt.BookId = b.BookId AND bt.BookId = @BookId
+	                            ON bt.BookId = b.BookId AND bt.BookId = @BookId AND b.IsActive = true
                             LEFT JOIN customers c
-	                            ON bt.CustomerId = c.CustomerId;";
+	                            ON bt.CustomerId = c.CustomerId AND c.IsActive = true;";
 
             var parameters = new
             {

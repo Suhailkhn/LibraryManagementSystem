@@ -30,17 +30,6 @@ namespace LibraryManagementSystem.Views
 
         private void AddBookBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var book = new Book
-            //{
-            //    ISBN = 1617294691,
-            //    Title = "C++ Concurrency in Action, 2nd Edition",
-            //    Authors = "Anthony Williams",
-            //    PublishingYear = 2012,
-            //    DateAdded = DateTime.Now,
-            //    TotalCopies = 7,
-            //    AvailableCopies = 3
-            //};
-
             var newWindow = new BookCreationWindow();
             newWindow.ShowDialog();
         }
@@ -49,6 +38,17 @@ namespace LibraryManagementSystem.Views
         {
             var newWindow = new CustomerCreationWindow();
             newWindow.ShowDialog();
+        }
+
+        private void DeleteCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new CustomerDeletionWindow();
+            newWindow.ShowDialog();
+        }
+
+        private void UpdateCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
