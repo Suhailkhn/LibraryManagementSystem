@@ -1,0 +1,72 @@
+﻿<Window x:Class="LibraryManagementSystem.Views.BookCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManagementSystem.Views"
+        xmlns:vm="clr-namespace:LibraryManagementSystem.ViewModels"
+        mc:Ignorable="d"
+        Title="Add New Book" Height="350" Width="400" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <vm:BookCreationVM x:Key="bookCreationVm"/>
+
+        <Style TargetType="Label" x:Key="labelStyle">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="textBoxStyle">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="actionBtnBaseStyle">
+            <Setter Property="Margin" Value="10 5"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource actionBtnBaseStyle}" x:Key="mainActionBtnStyle">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource actionBtnBaseStyle}" x:Key="secondaryActionBtnStyle">
+            <Setter Property="Background" Value="#004a7c"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10" DataContext="{StaticResource bookCreationVm}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.35*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Title" Style="{StaticResource labelStyle}"/>
+        <TextBox Grid.Column="1" Height="35" Width="270" TextWrapping="Wrap" Style="{StaticResource textBoxStyle}" Text="{Binding NewBook.Title, Mode=TwoWay}"/>
+
+        <Label Grid.Row="1" Content="Author(s)" Style="{StaticResource labelStyle}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="35" Width="270" TextWrapping="Wrap"  Style="{StaticResource textBoxStyle}" Text="{Binding NewBook.Authors, Mode=TwoWay}"/>
+
+        <Label Grid.Row="2" Content="ISBN" Style="{StaticResource labelStyle}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Height="20" Width="150" Style="{StaticResource textBoxStyle}" Text="{Binding NewBook.ISBN, Mode=TwoWay}"/>
+
+        <Label Grid.Row="3" Content="Publishing Year" Style="{StaticResource labelStyle}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Height="20" Width="100" Style="{StaticResource textBoxStyle}" Text="{Binding NewBook.PublishingYear, Mode=TwoWay}"/>
+
+        <Label Grid.Row="4" Content="Total Copies" Style="{StaticResource labelStyle}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Height="20" Width="100" Style="{StaticResource textBoxStyle}" Text="{Binding NewBook.TotalCopies, Mode=TwoWay}"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="5" Grid.ColumnSpan="2">
+            <Button Content="Add Book" Style="{StaticResource mainActionBtnStyle}" Command="{Binding CreateBookCommand}" CommandParameter="{Binding NewBook}"/>
+            <Button Content="Cancel"  Style="{StaticResource secondaryActionBtnStyle}" x:Name="CancelBtn" Click="CancelBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
