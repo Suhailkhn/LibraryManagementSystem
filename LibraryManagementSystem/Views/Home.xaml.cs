@@ -48,7 +48,8 @@ namespace LibraryManagementSystem.Views
 
         private void UpdateCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            var newWindow = new CustomerUpdationWindow();
+            newWindow.ShowDialog();
         }
     }
 }

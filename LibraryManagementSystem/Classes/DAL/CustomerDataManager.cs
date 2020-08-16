@@ -61,7 +61,7 @@ namespace LibraryManagementSystem.Classes.DAL
         {
             Customer result = null;
             string sql = @"SELECT
-                                CustomerId
+                                CustomerId,
                                 FirstName,
                                 LastName,
                                 Email,
@@ -104,6 +104,7 @@ namespace LibraryManagementSystem.Classes.DAL
 
             var parameters = new
             {
+                CustomerId = customer.CustomerId,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Email = customer.Email,

@@ -23,8 +23,8 @@ namespace LibraryManagementSystem.ViewModels
             get { return query; }
             set
             {
-                OnPropertyChanged("Query");
                 query = value;
+                OnPropertyChanged("Query");
             }
         }
 
@@ -39,8 +39,8 @@ namespace LibraryManagementSystem.ViewModels
             get { return selectedBook; }
             set
             {
-                OnPropertyChanged("SelectedBook");
                 selectedBook = value;
+                OnPropertyChanged("SelectedBook");
             }
         }
 

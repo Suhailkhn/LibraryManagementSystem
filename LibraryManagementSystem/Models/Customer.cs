@@ -8,7 +8,7 @@ namespace LibraryManagementSystem.Models
 {
     public class Customer
     {
-        public uint Id { get; set; }
+        public uint CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get { return $"{FirstName} {LastName}"; }  }
