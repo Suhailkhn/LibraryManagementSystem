@@ -118,6 +118,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CheckInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CheckOutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerCreationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,9 +162,13 @@
     <Compile Include="ViewModels\BookCreationVM.cs" />
     <Compile Include="ViewModels\BookSearchVM.cs" />
     <Compile Include="ViewModels\Commands\AddBookCommand.cs" />
+    <Compile Include="ViewModels\Commands\BookCheckInCommand.cs" />
+    <Compile Include="ViewModels\Commands\BookCheckOutCommand.cs" />
     <Compile Include="ViewModels\Commands\CreateCustomerAccountCommand.cs" />
     <Compile Include="ViewModels\Commands\DeleteBookCommand.cs" />
     <Compile Include="ViewModels\Commands\DeleteCustomerAccountCommand.cs" />
+    <Compile Include="ViewModels\Commands\EnableBookCheckInCommand.cs" />
+    <Compile Include="ViewModels\Commands\EnableBookCheckOutCommand.cs" />
     <Compile Include="ViewModels\Commands\FetchCustomerDetailsCommand.cs" />
     <Compile Include="ViewModels\Commands\OpenBookUpdateWindowCommand.cs" />
     <Compile Include="ViewModels\Commands\SearchBookCommand.cs" />
@@ -170,6 +182,12 @@
     </Compile>
     <Compile Include="Views\BookUpdationWindow.xaml.cs">
       <DependentUpon>BookUpdationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckInWindow.xaml.cs">
+      <DependentUpon>CheckInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckOutWindow.xaml.cs">
+      <DependentUpon>CheckOutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerCreationWindow.xaml.cs">
       <DependentUpon>CustomerCreationWindow.xaml</DependentUpon>

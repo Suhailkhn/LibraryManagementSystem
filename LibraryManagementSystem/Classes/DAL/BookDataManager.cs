@@ -215,6 +215,99 @@ namespace LibraryManagementSystem.Classes.DAL
             return result;
         }
 
+        public static async Task<bool> CheckOutBook(BookTransaction transaction)
+        {
+            bool success = true;
+            string sql = @"INSERT INTO book_transaction (
+	                            CustomerId,
+                                BookId,
+                                CheckOut
+                            ) Select
+	                            @CustomerId,
+                                @BookId,
+                                @CheckOut
+                            FROM DUAL
+                            WHERE NOT EXISTS (
+	                            SELECT TransactionId
+                                FROM book_transaction
+                                WHERE CustomerId = @CustomerId AND BookId = @BookId AND CheckIn IS NULL
+                            );";
+
+            string updateCopiesSql = @"UPDATE books 
+                                       SET AvailableCopies = AvailableCopies - 1 
+                                       WHERE BookId = {0}";
+
+            updateCopiesSql = String.Format(updateCopiesSql, transaction.Book.BookId);
+
+            var parameters = new
+            {
+                CustomerId = transaction.Customer.CustomerId,
+                BookId = transaction.Book.BookId,
+                CheckOut = transaction.CheckOut
+            };
+
+            try
+            {
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    int rowsAffected = await conn.ExecuteAsync(sql, parameters).ConfigureAwait(false);
+                    if (rowsAffected == 0)
+                        success = false;
+                    else
+                        rowsAffected = await conn.ExecuteAsync(updateCopiesSql).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                Console.WriteLine(e.Message);
+            }
+
+            return success;
+        }
+
+        public static async Task<bool> CheckInBook(BookTransaction transaction)
+        {
+            bool success = true;
+            string sql = @"UPDATE book_transaction
+                           SET CheckIn = @CheckIn
+                           WHERE CustomerId = @CustomerId 
+	                             AND BookId = @BookId
+	                             AND CheckIn IS NULL;";
+
+            string updateCopiesSql = @"UPDATE books 
+                                       SET AvailableCopies = AvailableCopies + 1 
+                                       WHERE BookId = {0}";
+
+            updateCopiesSql = String.Format(updateCopiesSql, transaction.Book.BookId);
+
+            var parameters = new
+            {
+                CustomerId = transaction.Customer.CustomerId,
+                BookId = transaction.Book.BookId,
+                CheckIn = transaction.CheckIn
+            };
+
+            try
+            {
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    int rowsAffected = await conn.ExecuteAsync(sql, parameters).ConfigureAwait(false);
+                    if (rowsAffected == 0)
+                        success = false;
+                    else
+                        rowsAffected = await conn.ExecuteAsync(updateCopiesSql).ConfigureAwait(false);
+                }
+            }
+            catch (Exception e)
+            {
+                success = false;
+                Console.WriteLine(e.Message);
+            }
+
+            return success;
+        }
+
         public static async Task<IEnumerable<BookTransaction>> GetBookTransactionHistory(uint bookId)
         {
             IEnumerable<BookTransaction> result = null;

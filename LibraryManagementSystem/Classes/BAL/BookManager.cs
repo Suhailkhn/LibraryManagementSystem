@@ -35,6 +35,16 @@ namespace LibraryManagementSystem.Classes.BAL
             return BookDataManager.SearchBooks(query);
         }
 
+        public static Task<bool> CheckOutBook(BookTransaction transaction)
+        {
+            return BookDataManager.CheckOutBook(transaction);
+        }
+
+        public static Task<bool> CheckInBook(BookTransaction transaction)
+        {
+            return BookDataManager.CheckInBook(transaction);
+        }
+
         public static Task<IEnumerable<BookTransaction>> GetBookTransactionHistory(uint bookId)
         {
             return BookDataManager.GetBookTransactionHistory(bookId);

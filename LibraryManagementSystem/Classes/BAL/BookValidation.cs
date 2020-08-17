@@ -37,5 +37,19 @@ namespace LibraryManagementSystem.Classes.BAL
                 return false;
             }
         }
+
+        public static bool BookValidForCheckOut(Book book)
+        {
+            if (book != null && book.BookId > 0 && book.AvailableCopies > 0)
+                return true;
+            return false;
+        }
+
+        public static bool BookValidForCheckIn(Book book)
+        {
+            if (book != null && book.BookId > 0 && book.AvailableCopies < book.TotalCopies)
+                return true;
+            return false;
+        }
     }
 }
