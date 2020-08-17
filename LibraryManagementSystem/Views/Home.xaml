@@ -129,7 +129,8 @@
 
                                 <Button Content="Check Out" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
                                                                                                 Path=DataContext.EnableCheckOutCommand}" CommandParameter="{Binding}"/>
-                                <Button Content="History" Margin="40, 0, 0, 0"/>
+                                <Button Content="History" Margin="40, 0, 0, 0" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
+                                                                                                Path=DataContext.ViewBookHistoryCommand}" CommandParameter="{Binding}"/>
                             </StackPanel>
                         </Expander>
                     </DataTemplate>

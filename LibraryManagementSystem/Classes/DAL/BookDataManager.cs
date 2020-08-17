@@ -285,7 +285,7 @@ namespace LibraryManagementSystem.Classes.DAL
             {
                 CustomerId = transaction.Customer.CustomerId,
                 BookId = transaction.Book.BookId,
-                CheckIn = transaction.CheckIn
+                CheckIn = transaction.CheckIn.Value
             };
 
             try
@@ -335,7 +335,8 @@ namespace LibraryManagementSystem.Classes.DAL
                             INNER JOIN books b
 	                            ON bt.BookId = b.BookId AND bt.BookId = @BookId AND b.IsActive = true
                             LEFT JOIN customers c
-	                            ON bt.CustomerId = c.CustomerId AND c.IsActive = true;";
+	                            ON bt.CustomerId = c.CustomerId AND c.IsActive = true
+                            ORDER BY bt.TransactionId DESC;";
 
             var parameters = new
             {

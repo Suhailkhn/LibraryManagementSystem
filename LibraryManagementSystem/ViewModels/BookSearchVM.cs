@@ -57,6 +57,8 @@ namespace LibraryManagementSystem.ViewModels
 
         public uint SuppliedCustomerId { get; set; }
 
+        public List<BookTransaction> BookHistory { get; set; }
+
         #region Commands
 
         public SearchBookCommand SearchBooksCommand { get; set; }
@@ -74,6 +76,8 @@ namespace LibraryManagementSystem.ViewModels
         public BookCheckOutCommand CheckOutCommand { get; set; }
 
         public BookCheckInCommand CheckInCommand { get; set; }
+
+        public ViewBookHistoryCommand ViewBookHistoryCommand { get; set; }
 
         #endregion
 
@@ -100,8 +104,10 @@ namespace LibraryManagementSystem.ViewModels
             EnableCheckInCommand = new EnableBookCheckInCommand(this);
             CheckOutCommand = new BookCheckOutCommand(this);
             CheckInCommand = new BookCheckInCommand(this);
+            ViewBookHistoryCommand = new ViewBookHistoryCommand(this);
 
             Books = new ObservableCollection<Book>();
+            BookHistory = new List<BookTransaction>();
         }
 
         #region Functions
@@ -246,6 +252,16 @@ namespace LibraryManagementSystem.ViewModels
             else
             {
                 DisplayErrorMessage(BookCheckInError);
+            }
+        }
+
+        public async void GetBookHistory()
+        {
+            BookHistory.Clear();
+            var result = await BookManager.GetBookTransactionHistory(SelectedBook.BookId).ConfigureAwait(false);
+            foreach (var record in result)
+            {
+                BookHistory.Add(record);
             }
         }
 
