@@ -83,6 +83,7 @@ namespace LibraryManagementSystem.Classes.DAL
 
             var parameters = new
             {
+                BookId = book.BookId,
                 ISBN = book.ISBN,
                 PlainISBN = book.PlainISBN,
                 Title = book.Title,

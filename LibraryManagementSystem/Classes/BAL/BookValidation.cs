@@ -11,7 +11,7 @@ namespace LibraryManagementSystem.Classes.BAL
     {
         public static bool ValidateBook(Book book)
         {
-            if (IsValidISBN(book.ISBN) && !String.IsNullOrWhiteSpace(book.Title))
+            if (IsValidISBN(book.ISBN) && !String.IsNullOrWhiteSpace(book.Title) && (book.AvailableCopies <= book.TotalCopies))
             {
                 book.PlainISBN = book.ISBN.Replace("-", "");
                 return true;
