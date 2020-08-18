@@ -69,6 +69,12 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
 
+        <Style TargetType="Button" x:Key="bookActionBtnBase">
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
     </Window.Resources>
     
     <Grid DataContext="{StaticResource bookSearchVM}">
@@ -117,20 +123,28 @@
                             <Expander.Header>
                                 <uc:BookCard Book="{Binding}"/>
                             </Expander.Header>
-                            <StackPanel Orientation="Horizontal" Margin="40, 0, 0, 0">
-                                <Button Content="Delete" Margin="0, 0, 40, 0" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
-                                                                                                Path=DataContext.DeleteBookCommand}" CommandParameter="{Binding}"/>
-                                
-                                <Button Content="Update" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
-                                                                                                Path=DataContext.OpenUpdateCommand}" CommandParameter="{Binding}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 
-                                <Button Content="Check In" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
-                                                                                                Path=DataContext.EnableCheckInCommand}" CommandParameter="{Binding}"/>
+                                <Button Content="Delete" Style="{StaticResource bookActionBtnBase}" Margin="0, 0, 55, 0" Background="#27496d"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
+                                                          Path=DataContext.DeleteBookCommand}" CommandParameter="{Binding}"/>
 
-                                <Button Content="Check Out" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
-                                                                                                Path=DataContext.EnableCheckOutCommand}" CommandParameter="{Binding}"/>
-                                <Button Content="History" Margin="40, 0, 0, 0" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
-                                                                                                Path=DataContext.ViewBookHistoryCommand}" CommandParameter="{Binding}"/>
+                                <Button Content="Update" Style="{StaticResource bookActionBtnBase}" Background="#085f63"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
+                                                          Path=DataContext.OpenUpdateCommand}" CommandParameter="{Binding}"/>
+
+                                <Button Content="Check In" Style="{StaticResource bookActionBtnBase}" Margin="15, 0" Background="#70416d"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
+                                                          Path=DataContext.EnableCheckInCommand}" CommandParameter="{Binding}"/>
+
+                                <Button Content="Check Out" Style="{StaticResource bookActionBtnBase}" Background="#cf1b1b"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
+                                                          Path=DataContext.EnableCheckOutCommand}" CommandParameter="{Binding}"/>
+
+                                <Button Content="History" Style="{StaticResource bookActionBtnBase}" Margin="55, 0, 35, 0" Background="#420000"
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}},
+                                                          Path=DataContext.ViewBookHistoryCommand}" CommandParameter="{Binding}"/>
+                            
                             </StackPanel>
                         </Expander>
                     </DataTemplate>
