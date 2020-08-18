@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +8,11 @@ using System.Windows.Input;
 
 namespace LibraryManagementSystem.ViewModels.Commands
 {
-    public class SearchBookCommand : ICommand
+    public class UpdateBookCommand : ICommand
     {
         public BookSearchVM BookSearchVM { get; set; }
 
-        public SearchBookCommand(BookSearchVM bookSearchVM)
+        public UpdateBookCommand(BookSearchVM bookSearchVM)
         {
             BookSearchVM = bookSearchVM;
         }
@@ -24,15 +25,19 @@ namespace LibraryManagementSystem.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            string query = parameter as string;
-            if (String.IsNullOrWhiteSpace(query))
+            var selectedBook = BookSearchVM.SelectedBook;
+
+            if(selectedBook == null || String.IsNullOrWhiteSpace(selectedBook.Title) || String.IsNullOrWhiteSpace(selectedBook.ISBN))
+            {
                 return false;
+            }
+
             return true;
         }
 
         public void Execute(object parameter)
         {
-            BookSearchVM.SearchBooks();
+            BookSearchVM.UpdateBook();
         }
     }
 }

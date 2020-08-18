@@ -7,11 +7,11 @@ using System.Windows.Input;
 
 namespace LibraryManagementSystem.ViewModels.Commands
 {
-    public class SearchBookCommand : ICommand
+    public class BookCheckOutCommand : ICommand
     {
         public BookSearchVM BookSearchVM { get; set; }
 
-        public SearchBookCommand(BookSearchVM bookSearchVM)
+        public BookCheckOutCommand(BookSearchVM bookSearchVM)
         {
             BookSearchVM = bookSearchVM;
         }
@@ -24,15 +24,12 @@ namespace LibraryManagementSystem.ViewModels.Commands
 
         public bool CanExecute(object parameter)
         {
-            string query = parameter as string;
-            if (String.IsNullOrWhiteSpace(query))
-                return false;
-            return true;
+            return BookSearchVM.SelectedBook.AvailableCopies > 0;
         }
 
         public void Execute(object parameter)
         {
-            BookSearchVM.SearchBooks();
+            BookSearchVM.CheckOutBook();
         }
     }
 }

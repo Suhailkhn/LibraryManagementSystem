@@ -1,0 +1,45 @@
+﻿<Window x:Class="LibraryManagementSystem.Views.BookHistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManagementSystem.Views"
+        mc:Ignorable="d"
+        Title="Book Transaction History" Height="450" Width="800" Background="#e8f1f5" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="DataGridColumnHeader" x:Key="columnHeaderStyle">
+            <Setter Property="Background" Value="#005691"/>
+            <Setter Property="Foreground" Value="#fafafa"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        
+        <Style TargetType="DataGrid" x:Key="gridStyle">
+            <Setter Property="Margin" Value="15"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="ColumnWidth" Value="180"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="RowBackground" Value="#eae9e9"/>
+            <Setter Property="AlternatingRowBackground" Value="#d4d7dd"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="ColumnHeaderStyle" Value="{StaticResource columnHeaderStyle}"/>
+
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <DataGrid x:Name="bookHistoryGrid" Style="{StaticResource gridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer ID" Binding="{Binding Customer.CustomerId}"/>
+                <DataGridTextColumn Header="Customer Name" Binding="{Binding Customer.FullName}"/>
+                <DataGridTextColumn Header="Check Out Time" Binding="{Binding CheckOut}"/>
+                <DataGridTextColumn Header="Check In Time" Binding="{Binding CheckIn}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
