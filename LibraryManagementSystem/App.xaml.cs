@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryManagementSystem.Classes;
+using LibraryManagementSystem.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,11 @@ namespace LibraryManagementSystem
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            DependencyInjector.Configure();
+            MainWindow = DependencyInjector.Retrieve<Home>();
+            MainWindow.Show();
+        }
     }
 }

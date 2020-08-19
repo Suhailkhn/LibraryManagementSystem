@@ -1,4 +1,6 @@
 ﻿using LibraryManagementSystem.Classes.DAL;
+using LibraryManagementSystem.Interfaces.BAL;
+using LibraryManagementSystem.Interfaces.DAL;
 using LibraryManagementSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -8,46 +10,53 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Classes.BAL
 {
-    class BookManager
+    class BookManager : IBookManager
     {
-        public static Task<bool> CreateBook(Book book)
+        private readonly IBookDataManager bookDataManager;
+
+        public BookManager(IBookDataManager _bookDataManager)
         {
-            return BookDataManager.CreateBook(book);
+            bookDataManager = _bookDataManager;
         }
 
-        public static Task<bool> UpdateBook(Book book)
+        public Task<bool> CreateBook(Book book)
         {
-            return BookDataManager.UpdateBook(book);
+            return bookDataManager.CreateBook(book);
         }
 
-        public static Task<bool> DeleteBook(uint bookId)
+        public Task<bool> UpdateBook(Book book)
         {
-            return BookDataManager.DeleteBook(bookId);
+            return bookDataManager.UpdateBook(book);
         }
 
-        public static Task<Book> GetBook(uint bookId)
+        public Task<bool> DeleteBook(uint bookId)
         {
-            return BookDataManager.GetBook(bookId);
+            return bookDataManager.DeleteBook(bookId);
         }
 
-        public static Task<IEnumerable<Book>> SearchBooks(string query)
+        public Task<Book> GetBook(uint bookId)
         {
-            return BookDataManager.SearchBooks(query);
+            return bookDataManager.GetBook(bookId);
         }
 
-        public static Task<bool> CheckOutBook(BookTransaction transaction)
+        public Task<IEnumerable<Book>> SearchBooks(string query)
         {
-            return BookDataManager.CheckOutBook(transaction);
+            return bookDataManager.SearchBooks(query);
         }
 
-        public static Task<bool> CheckInBook(BookTransaction transaction)
+        public Task<bool> CheckOutBook(BookTransaction transaction)
         {
-            return BookDataManager.CheckInBook(transaction);
+            return bookDataManager.CheckOutBook(transaction);
         }
 
-        public static Task<IEnumerable<BookTransaction>> GetBookTransactionHistory(uint bookId)
+        public Task<bool> CheckInBook(BookTransaction transaction)
         {
-            return BookDataManager.GetBookTransactionHistory(bookId);
+            return bookDataManager.CheckInBook(transaction);
+        }
+
+        public Task<IEnumerable<BookTransaction>> GetBookTransactionHistory(uint bookId)
+        {
+            return bookDataManager.GetBookTransactionHistory(bookId);
         }
     }
 }

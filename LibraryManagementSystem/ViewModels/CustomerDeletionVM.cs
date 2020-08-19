@@ -1,4 +1,5 @@
 ﻿using LibraryManagementSystem.Classes.BAL;
+using LibraryManagementSystem.Interfaces.BAL;
 using LibraryManagementSystem.ViewModels.Commands;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace LibraryManagementSystem.ViewModels
         private static readonly string FormatError = "Please enter a number greater than 0.";
 
         private static readonly string DeletionError = "Could not delete customer account. Please enter a valid ID OR the customer account has already been deleted.";
+
+        #endregion
+
+        #region Dependencies
+
+        private readonly ICustomerManager customerManager;
 
         #endregion
 
@@ -39,8 +46,9 @@ namespace LibraryManagementSystem.ViewModels
 
         #endregion
 
-        public CustomerDeletionVM()
+        public CustomerDeletionVM(ICustomerManager _customerManager)
         {
+            customerManager = _customerManager;
             DeleteCustomer = new DeleteCustomerAccountCommand(this);
         }
 
@@ -54,7 +62,7 @@ namespace LibraryManagementSystem.ViewModels
                 return;
             }
 
-            bool success = await CustomerManager.DeleteCustomer(CustomerId).ConfigureAwait(false);
+            bool success = await customerManager.DeleteCustomer(CustomerId).ConfigureAwait(false);
 
             if(success)
             {

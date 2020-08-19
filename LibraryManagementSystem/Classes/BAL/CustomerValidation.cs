@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Classes.BAL
 {
     partial class Validation
     {
-        public static bool ValidateCustomer(Customer customer)
+        public bool ValidateCustomer(Customer customer)
         {
             if (String.IsNullOrWhiteSpace(customer.FirstName) ||
                !IsValidEmail(customer.Email) ||
@@ -22,7 +22,7 @@ namespace LibraryManagementSystem.Classes.BAL
             return true;
         }
 
-        public static bool IsValidEmail(string email)
+        public bool IsValidEmail(string email)
         {
             try
             {

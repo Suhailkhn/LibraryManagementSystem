@@ -94,6 +94,12 @@
     <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.21\lib\net452\Ubiety.Dns.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.7\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.8.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.7\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -156,11 +162,13 @@
     <Compile Include="Classes\BAL\CustomerValidation.cs" />
     <Compile Include="Classes\DAL\BookDataManager.cs" />
     <Compile Include="Classes\DAL\CustomerDataManager.cs" />
+    <Compile Include="Classes\DependencyInjector.cs" />
     <Compile Include="Controls\BookCard.xaml.cs">
       <DependentUpon>BookCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\BAL\IBookManager.cs" />
     <Compile Include="Interfaces\BAL\ICustomerManager.cs" />
+    <Compile Include="Interfaces\BAL\IValidation.cs" />
     <Compile Include="Interfaces\DAL\IBookDataManager.cs" />
     <Compile Include="Interfaces\DAL\ICustomerDataManager.cs" />
     <Compile Include="ViewModels\BookCreationVM.cs" />
@@ -232,6 +240,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="connection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

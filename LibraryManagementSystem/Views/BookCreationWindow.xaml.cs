@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementSystem.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
 
 namespace LibraryManagementSystem.Views
 {
@@ -19,6 +21,15 @@ namespace LibraryManagementSystem.Views
     /// </summary>
     public partial class BookCreationWindow : Window
     {
+        [Dependency]
+        public BookCreationVM BookCreationVM
+        {
+            set
+            {
+                DataContext = value;
+            }
+        }
+
         public BookCreationWindow()
         {
             InitializeComponent();

@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Models;
+﻿using LibraryManagementSystem.Interfaces.BAL;
+using LibraryManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Classes.BAL
 {
-    partial class Validation
+    partial class Validation : IValidation
     {
-        public static bool ValidateBook(Book book)
+        public bool ValidateBook(Book book)
         {
             if (IsValidISBN(book.ISBN) && !String.IsNullOrWhiteSpace(book.Title) && (book.AvailableCopies <= book.TotalCopies))
             {
@@ -20,7 +21,7 @@ namespace LibraryManagementSystem.Classes.BAL
                 return false;
         }
 
-        public static bool IsValidISBN(string iSBN)
+        public bool IsValidISBN(string iSBN)
         {
             if (String.IsNullOrWhiteSpace(iSBN))
                 return false;
@@ -38,14 +39,14 @@ namespace LibraryManagementSystem.Classes.BAL
             }
         }
 
-        public static bool BookValidForCheckOut(Book book)
+        public bool BookValidForCheckOut(Book book)
         {
             if (book != null && book.BookId > 0 && book.AvailableCopies > 0)
                 return true;
             return false;
         }
 
-        public static bool BookValidForCheckIn(Book book)
+        public bool BookValidForCheckIn(Book book)
         {
             if (book != null && book.BookId > 0 && book.AvailableCopies < book.TotalCopies)
                 return true;

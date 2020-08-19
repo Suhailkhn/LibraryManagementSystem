@@ -1,4 +1,5 @@
 ﻿using LibraryManagementSystem.Classes.BAL;
+using LibraryManagementSystem.Interfaces.BAL;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.ViewModels.Commands;
 using System;
@@ -34,6 +35,13 @@ namespace LibraryManagementSystem.ViewModels
         private static readonly string BookCheckInSuccess = "Successfully checked in book.";
         private static readonly string BookCheckInConditionError = "Customer ID should be a number greater than 0 OR all copies of this book have already been checked in.";
         private static readonly string BookCheckInError = "Could not check in book. Please enter a valid Customer ID OR the customer has not currently checked out this book.";
+
+        #endregion
+
+        #region Dependencies
+
+        private readonly IBookManager bookManager;
+        private readonly IValidation validation;
 
         #endregion
 
@@ -94,8 +102,11 @@ namespace LibraryManagementSystem.ViewModels
 
         #endregion
 
-        public BookSearchVM()
+        public BookSearchVM(IBookManager _bookManager, IValidation _validation)
         {
+            bookManager = _bookManager;
+            validation = _validation;
+
             SearchBooksCommand = new SearchBookCommand(this);
             DeleteBookCommand = new DeleteBookCommand(this);
             OpenUpdateCommand = new OpenBookUpdateWindowCommand(this);
@@ -114,7 +125,7 @@ namespace LibraryManagementSystem.ViewModels
 
         public async void SearchBooks()
         {
-            var books = await BookManager.SearchBooks(Query).ConfigureAwait(false);
+            var books = await bookManager.SearchBooks(Query).ConfigureAwait(false);
 
             Books.Clear();
 
@@ -143,7 +154,7 @@ namespace LibraryManagementSystem.ViewModels
             if (result != MessageBoxResult.Yes)
                 return;
 
-            bool success = await BookManager.DeleteBook(SelectedBook.BookId).ConfigureAwait(false);
+            bool success = await bookManager.DeleteBook(SelectedBook.BookId).ConfigureAwait(false);
 
             if (success)
             {
@@ -164,7 +175,7 @@ namespace LibraryManagementSystem.ViewModels
                 return;
             }
 
-            bool success = await BookManager.UpdateBook(SelectedBook).ConfigureAwait(false);
+            bool success = await bookManager.UpdateBook(SelectedBook).ConfigureAwait(false);
 
             if(success)
             {
@@ -198,7 +209,7 @@ namespace LibraryManagementSystem.ViewModels
                 CheckOut = DateTime.Now
             };
 
-            bool success = await BookManager.CheckOutBook(transaction).ConfigureAwait(false);
+            bool success = await bookManager.CheckOutBook(transaction).ConfigureAwait(false);
 
             SuppliedCustomerId = 0;
             OnPropertyChanged("SuppliedCustomerId");
@@ -237,7 +248,7 @@ namespace LibraryManagementSystem.ViewModels
                 CheckIn = DateTime.Now
             };
 
-            bool success = await BookManager.CheckInBook(transaction).ConfigureAwait(false);
+            bool success = await bookManager.CheckInBook(transaction).ConfigureAwait(false);
 
             SuppliedCustomerId = 0;
             OnPropertyChanged("SuppliedCustomerId");
@@ -258,7 +269,7 @@ namespace LibraryManagementSystem.ViewModels
         public async void GetBookHistory()
         {
             BookHistory.Clear();
-            var result = await BookManager.GetBookTransactionHistory(SelectedBook.BookId).ConfigureAwait(false);
+            var result = await bookManager.GetBookTransactionHistory(SelectedBook.BookId).ConfigureAwait(false);
             foreach (var record in result)
             {
                 BookHistory.Add(record);
@@ -272,17 +283,17 @@ namespace LibraryManagementSystem.ViewModels
 
         private bool PerformBookUpdationValidation()
         {
-            return Validation.ValidateBook(SelectedBook);
+            return validation.ValidateBook(SelectedBook);
         }
 
         private bool PerformCheckOutValidation()
         {
-            return Validation.BookValidForCheckOut(SelectedBook) && SuppliedCustomerId > 0;
+            return validation.BookValidForCheckOut(SelectedBook) && SuppliedCustomerId > 0;
         }
 
         private bool PerformCheckInValidation()
         {
-            return Validation.BookValidForCheckIn(SelectedBook) && SuppliedCustomerId > 0;
+            return validation.BookValidForCheckIn(SelectedBook) && SuppliedCustomerId > 0;
         }
 
         private void DisplayErrorMessage(string errorMessage)

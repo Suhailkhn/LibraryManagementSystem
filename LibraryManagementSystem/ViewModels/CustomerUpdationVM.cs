@@ -1,4 +1,5 @@
 ﻿using LibraryManagementSystem.Classes.BAL;
+using LibraryManagementSystem.Interfaces.BAL;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.ViewModels.Commands;
 using System;
@@ -19,6 +20,13 @@ namespace LibraryManagementSystem.ViewModels
         private static readonly string FetchError = "Could not find customer. Please enter a valid Customer ID OR the customer account has already been deleted.";
         private static readonly string UpdationFormatError = "Please enter all the customer details in a valid format.";
         private static readonly string UpdationError = "Could not update customer details.";
+
+        #endregion
+
+        #region Dependencies
+
+        private readonly ICustomerManager customerManager;
+        private readonly IValidation validation;
 
         #endregion
 
@@ -78,8 +86,11 @@ namespace LibraryManagementSystem.ViewModels
 
         #endregion
 
-        public CustomerUpdationVM()
+        public CustomerUpdationVM(ICustomerManager _customerManager, IValidation _validation)
         {
+            customerManager = _customerManager;
+            validation = _validation;
+
             FetchCustomerCommand = new FetchCustomerDetailsCommand(this);
             UpdateCustomerCommand = new UpdateCustomerAccountCommand(this);
             FetchedCustomer = new Customer();
@@ -96,7 +107,7 @@ namespace LibraryManagementSystem.ViewModels
                 return;
             }
 
-            var customer = await CustomerManager.GetCustomerDetails(SuppliedCustomerId).ConfigureAwait(false);
+            var customer = await customerManager.GetCustomerDetails(SuppliedCustomerId).ConfigureAwait(false);
 
             if(customer == null)
             {
@@ -117,7 +128,7 @@ namespace LibraryManagementSystem.ViewModels
                 return;
             }
 
-            bool success = await CustomerManager.UpdateCustomer(FetchedCustomer).ConfigureAwait(false);
+            bool success = await customerManager.UpdateCustomer(FetchedCustomer).ConfigureAwait(false);
 
             if(success)
             {
@@ -143,7 +154,7 @@ namespace LibraryManagementSystem.ViewModels
 
         private bool PerformUpdateValidation()
         {
-            return Validation.ValidateCustomer(FetchedCustomer);
+            return validation.ValidateCustomer(FetchedCustomer);
         }
 
         #endregion

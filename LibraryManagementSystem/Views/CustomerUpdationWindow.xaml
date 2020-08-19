@@ -10,8 +10,6 @@
 
     <Window.Resources>
 
-        <vm:CustomerUpdationVM x:Key="customerUpdationVM"/>
-
         <Style TargetType="TextBox" x:Key="customerIdTextBox">
             <Setter Property="Height" Value="20"/>
             <Setter Property="Width" Value="120"/>
@@ -52,7 +50,7 @@
 
     </Window.Resources>
     
-    <Grid DataContext="{StaticResource customerUpdationVM}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition Width="*"/>

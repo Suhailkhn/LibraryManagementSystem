@@ -1,6 +1,8 @@
-﻿using LibraryManagementSystem.Classes.BAL;
+﻿using LibraryManagementSystem.Classes;
+using LibraryManagementSystem.Classes.BAL;
 using LibraryManagementSystem.Classes.DAL;
 using LibraryManagementSystem.Models;
+using LibraryManagementSystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
 
 namespace LibraryManagementSystem.Views
 {
@@ -23,6 +26,15 @@ namespace LibraryManagementSystem.Views
     /// </summary>
     public partial class Home : Window
     {
+        [Dependency]
+        public BookSearchVM BookSearchVM
+        {
+            set
+            {
+                DataContext = value;
+            }
+        }
+
         public Home()
         {
             InitializeComponent();
@@ -30,25 +42,25 @@ namespace LibraryManagementSystem.Views
 
         private void AddBookBtn_Click(object sender, RoutedEventArgs e)
         {
-            var newWindow = new BookCreationWindow();
+            var newWindow = DependencyInjector.Retrieve<BookCreationWindow>();
             newWindow.ShowDialog();
         }
 
         private void CreateCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-            var newWindow = new CustomerCreationWindow();
+            var newWindow = DependencyInjector.Retrieve<CustomerCreationWindow>();
             newWindow.ShowDialog();
         }
 
         private void DeleteCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-            var newWindow = new CustomerDeletionWindow();
+            var newWindow = DependencyInjector.Retrieve<CustomerDeletionWindow>();
             newWindow.ShowDialog();
         }
 
         private void UpdateCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-            var newWindow = new CustomerUpdationWindow();
+            var newWindow = DependencyInjector.Retrieve<CustomerUpdationWindow>();
             newWindow.ShowDialog();
         }
     }

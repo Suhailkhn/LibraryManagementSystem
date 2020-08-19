@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace LibraryManagementSystem.ViewModels.Commands
 {
-    class AddBookCommand : ICommand
+    public class AddBookCommand : ICommand
     {
         public BookCreationVM BookCreationVM { get; set; }
 

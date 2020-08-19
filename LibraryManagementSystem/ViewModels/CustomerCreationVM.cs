@@ -1,4 +1,5 @@
 ﻿using LibraryManagementSystem.Classes.BAL;
+using LibraryManagementSystem.Interfaces.BAL;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.ViewModels.Commands;
 using System;
@@ -11,7 +12,7 @@ using System.Windows;
 
 namespace LibraryManagementSystem.ViewModels
 {
-    class CustomerCreationVM : INotifyPropertyChanged
+    public class CustomerCreationVM : INotifyPropertyChanged
     {
         #region Static Members
 
@@ -20,6 +21,13 @@ namespace LibraryManagementSystem.ViewModels
         private static readonly string InsertionError = "Cannot create customer account.";
 
         private static readonly string InsertionSuccess = "Successfully created customer account!\nCustomer ID : {0}";
+
+        #endregion
+
+        #region Dependencies
+
+        private readonly ICustomerManager customerManager;
+        private readonly IValidation validation;
 
         #endregion
 
@@ -42,8 +50,11 @@ namespace LibraryManagementSystem.ViewModels
 
         #endregion
 
-        public CustomerCreationVM()
+        public CustomerCreationVM(ICustomerManager _customerManager, IValidation _validation)
         {
+            customerManager = _customerManager;
+            validation = _validation;
+
             NewCustomer = new Customer();
             NewCustomer.DateOfBirth = DateTime.Now.Date;
             CreateCustomerCommand = new CreateCustomerAccountCommand(this);
@@ -61,7 +72,7 @@ namespace LibraryManagementSystem.ViewModels
 
             NewCustomer.AccountCreatedOn = DateTime.Now;
 
-            uint customerId = await CustomerManager.CreateCustomer(NewCustomer).ConfigureAwait(false);
+            uint customerId = await customerManager.CreateCustomer(NewCustomer).ConfigureAwait(false);
 
             if(customerId == 0)
             {
@@ -85,7 +96,7 @@ namespace LibraryManagementSystem.ViewModels
 
         private bool PerformValidation()
         {
-            return Validation.ValidateCustomer(NewCustomer);
+            return validation.ValidateCustomer(NewCustomer);
         }
 
         private void DisplayErrorMessage(string errorMessage)

@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 using LibraryManagementSystem.Models;
 using MySql.Data.MySqlClient;
 using Dapper;
+using LibraryManagementSystem.Interfaces.DAL;
 
 namespace LibraryManagementSystem.Classes.DAL
 {
-    class BookDataManager
+    public class BookDataManager : IBookDataManager
     {
-        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["lms-localDB"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["lms-localDB"].ConnectionString;
 
-        public static async Task<bool> CreateBook(Book book)
+        public async Task<bool> CreateBook(Book book)
         {
             bool success = true;
             string sql = @"INSERT INTO books (
@@ -68,7 +69,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return success;
         }
 
-        public static async Task<bool> UpdateBook(Book book)
+        public async Task<bool> UpdateBook(Book book)
         {
             bool success = true;
             string sql = @"UPDATE books
@@ -111,7 +112,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return success;
         }
 
-        public static async Task<bool> DeleteBook(uint bookId)
+        public async Task<bool> DeleteBook(uint bookId)
         {
             bool success = true;
             string sql = @"Update books 
@@ -142,7 +143,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return success;
         }
 
-        public static async Task<Book> GetBook(uint bookId)
+        public async Task<Book> GetBook(uint bookId)
         {
             Book result = null;
 
@@ -180,7 +181,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return result;
         }
 
-        public static async Task<IEnumerable<Book>> SearchBooks(string query)
+        public async Task<IEnumerable<Book>> SearchBooks(string query)
         {
             IEnumerable<Book> result = null;
             
@@ -195,16 +196,19 @@ namespace LibraryManagementSystem.Classes.DAL
                                 TotalCopies,
                                 AvailableCopies
                             FROM books
-                            WHERE Title Like '%{0}%'
+                            WHERE Title Like @Query
                             AND IsActive = true;";
 
-            sql = String.Format(sql, query);
+            var parameters = new
+            {
+                Query = "%" + query + "%"
+            };
 
             try
             {
                 using (var conn = new MySqlConnection(connectionString))
                 {
-                    result = await conn.QueryAsync<Book>(sql).ConfigureAwait(false);
+                    result = await conn.QueryAsync<Book>(sql, parameters).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
@@ -215,7 +219,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return result;
         }
 
-        public static async Task<bool> CheckOutBook(BookTransaction transaction)
+        public async Task<bool> CheckOutBook(BookTransaction transaction)
         {
             bool success = true;
             string sql = @"INSERT INTO book_transaction (
@@ -266,7 +270,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return success;
         }
 
-        public static async Task<bool> CheckInBook(BookTransaction transaction)
+        public async Task<bool> CheckInBook(BookTransaction transaction)
         {
             bool success = true;
             string sql = @"UPDATE book_transaction
@@ -308,7 +312,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return success;
         }
 
-        public static async Task<IEnumerable<BookTransaction>> GetBookTransactionHistory(uint bookId)
+        public async Task<IEnumerable<BookTransaction>> GetBookTransactionHistory(uint bookId)
         {
             IEnumerable<BookTransaction> result = null;
 
