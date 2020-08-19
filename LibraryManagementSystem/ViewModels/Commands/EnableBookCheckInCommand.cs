@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Models;
+﻿using LibraryManagementSystem.Classes;
+using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Views;
 using System;
 using System.Collections.Generic;
@@ -42,8 +43,7 @@ namespace LibraryManagementSystem.ViewModels.Commands
             {
                 BookSearchVM.SelectedBook = selectedBook;
 
-                var newWindow = new CheckInWindow();
-                newWindow.DataContext = BookSearchVM;
+                var newWindow = DependencyInjector.Retrieve<CheckInWindow>();
                 newWindow.ShowDialog();
             }
         }

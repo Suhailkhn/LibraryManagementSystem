@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Models;
+﻿using LibraryManagementSystem.Classes;
+using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Views;
 using System;
 using System.Collections.Generic;
@@ -41,8 +42,7 @@ namespace LibraryManagementSystem.ViewModels.Commands
 
             if(BookSearchVM.BookHistory != null && BookSearchVM.BookHistory.Any())
             {
-                var newWindow = new BookHistoryWindow();
-                newWindow.bookHistoryGrid.ItemsSource = BookSearchVM.BookHistory;
+                var newWindow = DependencyInjector.Retrieve<BookHistoryWindow>();
                 newWindow.ShowDialog();
             }
             else

@@ -33,7 +33,7 @@
     </Window.Resources>
     
     <Grid>
-        <DataGrid x:Name="bookHistoryGrid" Style="{StaticResource gridStyle}">
+        <DataGrid Style="{StaticResource gridStyle}" ItemsSource="{Binding BookHistory}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Customer ID" Binding="{Binding Customer.CustomerId}"/>
                 <DataGridTextColumn Header="Customer Name" Binding="{Binding Customer.FullName}"/>

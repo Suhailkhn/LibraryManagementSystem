@@ -45,7 +45,7 @@
             <RowDefinition Height="0.6*"/>
         </Grid.RowDefinitions>
 
-        <Image Height="130" Grid.RowSpan="4" x:Name="bookCover" Source="http://covers.openlibrary.org/b/isbn/1617294691-L.jpg" />
+        <Image Height="130" Grid.RowSpan="4" x:Name="bookCover" Source="http://covers.openlibrary.org/b/isbn/1617294691-L.jpg"/>
         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource bookTitle}" x:Name="bookTitle" Text="C++ Concurrency in Action, 2nd Edition"/>
         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource authorText}" x:Name="bookAuthors" Text="Author(s) : Anthony Williams"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Style="{StaticResource textBase}" x:Name="bookPublishingYear" Text="Publishing Year: 2012"/>

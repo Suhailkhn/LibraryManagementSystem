@@ -1,4 +1,5 @@
 ﻿using LibraryManagementSystem.Classes.BAL;
+using LibraryManagementSystem.Interfaces.BAL;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.ViewModels.Commands;
 using System;
@@ -11,13 +12,20 @@ using System.Windows;
 
 namespace LibraryManagementSystem.ViewModels
 {
-    class BookCreationVM : INotifyPropertyChanged
+    public class BookCreationVM : INotifyPropertyChanged
     {
         #region StaticMembers
 
         private static readonly string FormatError = "Please enter the book details in a valid format.";
 
         private static readonly string InsertionError = "Cannot insert book. The book already exists in the system or has been deleted permanently from the system preventing reinsertion.";
+
+        #endregion
+
+        #region Dependencies
+
+        private readonly IBookManager bookManager;
+        private readonly IValidation validation;
 
         #endregion
 
@@ -40,8 +48,11 @@ namespace LibraryManagementSystem.ViewModels
 
         #endregion
 
-        public BookCreationVM()
+        public BookCreationVM(IBookManager _bookManager, IValidation _validation)
         {
+            bookManager = _bookManager;
+            validation = _validation;
+
             NewBook = new Book();
             CreateBookCommand = new AddBookCommand(this);
         }
@@ -50,7 +61,7 @@ namespace LibraryManagementSystem.ViewModels
 
         private bool PerformValidation()
         {
-            return Validation.ValidateBook(NewBook);
+            return validation.ValidateBook(NewBook);
         }
 
         public async void CreateBook()
@@ -63,7 +74,7 @@ namespace LibraryManagementSystem.ViewModels
 
             NewBook.DateAdded = DateTime.Now;
             NewBook.AvailableCopies = NewBook.TotalCopies;
-            bool success = await BookManager.CreateBook(NewBook).ConfigureAwait(false);
+            bool success = await bookManager.CreateBook(NewBook).ConfigureAwait(false);
 
             if (success)
             {

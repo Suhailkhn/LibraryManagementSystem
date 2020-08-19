@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace LibraryManagementSystem.ViewModels.Commands
 {
-    class CreateCustomerAccountCommand : ICommand
+    public class CreateCustomerAccountCommand : ICommand
     {
         public CustomerCreationVM CustomerCreationVM { get; set; }
 

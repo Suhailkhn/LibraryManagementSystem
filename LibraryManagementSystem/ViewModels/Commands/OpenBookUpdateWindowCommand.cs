@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Models;
+﻿using LibraryManagementSystem.Classes;
+using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Views;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,8 @@ namespace LibraryManagementSystem.ViewModels.Commands
             if(selectedBook != null)
             {
                 BookSearchVM.SelectedBook = selectedBook;
-                var newWindow = new BookUpdationWindow();
-                newWindow.DataContext = BookSearchVM;
+
+                var newWindow = DependencyInjector.Retrieve<BookUpdationWindow>();
                 newWindow.ShowDialog();
             }
         }

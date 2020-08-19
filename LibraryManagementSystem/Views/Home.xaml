@@ -10,7 +10,6 @@
         Title="Library Management System" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <vm:BookSearchVM x:Key="bookSearchVM"/>
 
         <Style TargetType="Button" x:Key="searchBtnStyle">
             <Setter Property="Background" Value="#004a7c"/>
@@ -77,7 +76,7 @@
 
     </Window.Resources>
     
-    <Grid DataContext="{StaticResource bookSearchVM}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.35*"/>
             <ColumnDefinition Width="*"/>

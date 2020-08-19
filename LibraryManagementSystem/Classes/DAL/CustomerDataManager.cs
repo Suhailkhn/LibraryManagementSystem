@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using LibraryManagementSystem.Interfaces.DAL;
 using LibraryManagementSystem.Models;
 using MySql.Data.MySqlClient;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Classes.DAL
 {
-    class CustomerDataManager
+    public class CustomerDataManager : ICustomerDataManager
     {
-        private static readonly string connectionString = ConfigurationManager.ConnectionStrings["lms-localDB"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["lms-localDB"].ConnectionString;
 
-        public static async Task<uint> CreateCustomer(Customer customer)
+        public async Task<uint> CreateCustomer(Customer customer)
         {
             uint result = 0;
             string sql = @"INSERT INTO customers (
@@ -57,7 +58,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return result;
         }
 
-        public static async Task<Customer> GetCustomerDetails(uint customerId)
+        public async Task<Customer> GetCustomerDetails(uint customerId)
         {
             Customer result = null;
             string sql = @"SELECT
@@ -92,7 +93,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return result;
         }
 
-        public static async Task<bool> UpdateCustomer(Customer customer)
+        public async Task<bool> UpdateCustomer(Customer customer)
         {
             bool success = true;
             string sql = @"UPDATE customers
@@ -130,7 +131,7 @@ namespace LibraryManagementSystem.Classes.DAL
             return success;
         }
 
-        public static async Task<bool> DeleteCustomer(uint customerId)
+        public async Task<bool> DeleteCustomer(uint customerId)
         {
             bool success = true;
             string sql = @"UPDATE customers

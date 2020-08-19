@@ -9,8 +9,6 @@
         Title="Add New Book" Height="350" Width="400" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <vm:BookCreationVM x:Key="bookCreationVm"/>
-
         <Style TargetType="Label" x:Key="labelStyle">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
@@ -35,7 +33,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="10" DataContext="{StaticResource bookCreationVm}">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.35*"/>
             <ColumnDefinition Width="*"/>

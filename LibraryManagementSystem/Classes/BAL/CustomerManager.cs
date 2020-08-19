@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Classes.DAL;
+﻿using LibraryManagementSystem.Interfaces.BAL;
+using LibraryManagementSystem.Interfaces.DAL;
 using LibraryManagementSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,33 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Classes.BAL
 {
-    class CustomerManager
+    class CustomerManager : ICustomerManager
     {
-        public static Task<uint> CreateCustomer(Customer customer)
+        private readonly ICustomerDataManager customerDataManager;
+
+        public CustomerManager(ICustomerDataManager _customerDataManager)
         {
-            return CustomerDataManager.CreateCustomer(customer);
+            customerDataManager = _customerDataManager;
         }
 
-        public static Task<Customer> GetCustomerDetails(uint customerId)
+        public Task<uint> CreateCustomer(Customer customer)
         {
-            return CustomerDataManager.GetCustomerDetails(customerId);
+            return customerDataManager.CreateCustomer(customer);
         }
 
-        public static Task<bool> UpdateCustomer(Customer customer)
+        public Task<Customer> GetCustomerDetails(uint customerId)
         {
-            return CustomerDataManager.UpdateCustomer(customer);
+            return customerDataManager.GetCustomerDetails(customerId);
         }
 
-        public static Task<bool> DeleteCustomer(uint customerId)
+        public Task<bool> UpdateCustomer(Customer customer)
         {
-            return CustomerDataManager.DeleteCustomer(customerId);
+            return customerDataManager.UpdateCustomer(customer);
+        }
+
+        public Task<bool> DeleteCustomer(uint customerId)
+        {
+            return customerDataManager.DeleteCustomer(customerId);
         }
     }
 }
