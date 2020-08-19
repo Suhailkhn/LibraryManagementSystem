@@ -195,16 +195,19 @@ namespace LibraryManagementSystem.Classes.DAL
                                 TotalCopies,
                                 AvailableCopies
                             FROM books
-                            WHERE Title Like '%{0}%'
+                            WHERE Title Like @Query
                             AND IsActive = true;";
 
-            sql = String.Format(sql, query);
+            var parameters = new
+            {
+                Query = "%" + query + "%"
+            };
 
             try
             {
                 using (var conn = new MySqlConnection(connectionString))
                 {
-                    result = await conn.QueryAsync<Book>(sql).ConfigureAwait(false);
+                    result = await conn.QueryAsync<Book>(sql, parameters).ConfigureAwait(false);
                 }
             }
             catch (Exception e)
