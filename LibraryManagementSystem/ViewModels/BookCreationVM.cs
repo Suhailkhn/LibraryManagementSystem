@@ -66,14 +66,15 @@ namespace LibraryManagementSystem.ViewModels
 
         public async void CreateBook()
         {
-            if(!PerformValidation())
+            NewBook.DateAdded = DateTime.Now;
+            NewBook.AvailableCopies = NewBook.TotalCopies;
+
+            if (!PerformValidation())
             {
                 DisplayErrorMessage(FormatError);
                 return;
             }
 
-            NewBook.DateAdded = DateTime.Now;
-            NewBook.AvailableCopies = NewBook.TotalCopies;
             bool success = await bookManager.CreateBook(NewBook).ConfigureAwait(false);
 
             if (success)
