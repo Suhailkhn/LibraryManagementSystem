@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         mc:Ignorable="d"
-        Title="Book Transaction History" Height="450" Width="800" Background="#e8f1f5" WindowStartupLocation="CenterScreen">
+        Title="Book Transaction History" Icon="/books_93h_icon.ico"
+        Height="450" Width="800" Background="#e8f1f5" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="DataGridColumnHeader" x:Key="columnHeaderStyle">

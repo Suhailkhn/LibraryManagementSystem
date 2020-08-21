@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         xmlns:vm="clr-namespace:LibraryManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Add New Book" Height="350" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Add New Book" Icon="/books_93h_icon.ico"
+        Height="350" Width="400" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Label" x:Key="labelStyle">

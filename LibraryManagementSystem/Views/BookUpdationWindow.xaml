@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         mc:Ignorable="d"
-        Title="Update Book Details" Height="350" Width="410" WindowStartupLocation="CenterScreen">
+        Title="Update Book Details" Icon="/books_93h_icon.ico"
+        Height="350" Width="410" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Label" x:Key="labelStyle">

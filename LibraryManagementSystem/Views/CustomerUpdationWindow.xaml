@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         xmlns:vm="clr-namespace:LibraryManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Update Customer Account" Height="450" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Update Customer Account" Icon="/books_93h_icon.ico"
+        Height="450" Width="400" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
 

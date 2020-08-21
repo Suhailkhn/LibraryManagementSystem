@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         xmlns:vm="clr-namespace:LibraryManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Delete Customer" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Delete Customer" Icon="/books_93h_icon.ico"
+        Height="200" Width="300" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Button" x:Key="actionBtnBaseStyle">

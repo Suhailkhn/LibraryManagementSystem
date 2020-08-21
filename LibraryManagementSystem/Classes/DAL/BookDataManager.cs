@@ -338,7 +338,7 @@ namespace LibraryManagementSystem.Classes.DAL
                             FROM book_transaction bt
                             INNER JOIN books b
 	                            ON bt.BookId = b.BookId AND bt.BookId = @BookId AND b.IsActive = true
-                            LEFT JOIN customers c
+                            INNER JOIN customers c
 	                            ON bt.CustomerId = c.CustomerId AND c.IsActive = true
                             ORDER BY bt.TransactionId DESC;";
 

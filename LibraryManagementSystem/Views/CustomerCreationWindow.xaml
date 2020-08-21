@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         xmlns:vm="clr-namespace:LibraryManagementSystem.ViewModels"
         mc:Ignorable="d"
-        Title="Create New Customer Account" Height="300" Width="350" WindowStartupLocation="CenterScreen">
+        Title="Create New Customer Account" Icon="/books_93h_icon.ico"
+        Height="300" Width="350" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Label" x:Key="labelStyle">

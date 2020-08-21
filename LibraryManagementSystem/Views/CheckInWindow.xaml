@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementSystem.Views"
         mc:Ignorable="d"
-        Title="Check In Book" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+        Title="Check In Book" Icon="/books_93h_icon.ico"
+        Height="200" Width="300" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style TargetType="Button" x:Key="actionBtnBaseStyle">
