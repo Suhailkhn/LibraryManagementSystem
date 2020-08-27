@@ -1,4 +1,4 @@
-# LibraryManagementSystem
+# Library Management System
 
 A desktop application made using C# and WPF, to be used in a library to manage their inventory of books. 
 
